@@ -1,8 +1,8 @@
 cmake_minimum_required (VERSION 2.8.12)
 project (libpd C)
 
-option(PD_UTILS  "Compile utilities" ON)
-option(PD_EXTRA  "Compile extras" ON)
+option(PD_UTILS  "Compile utilities" OFF)
+option(PD_EXTRA  "Compile extras" OFF)
 option(PD_MULTI  "Compile with multiple instance support" OFF)
 option(PD_LOCALE "Set the LC_NUMERIC number format to the default C locale" ON)
 option(PD_BUILD_C_EXAMPLES "Builds C API example programs" OFF)
@@ -20,7 +20,7 @@ if (MSVC)
         message(FATAL_ERROR "Please provide a path to the pthreads library and its headers.")
     endif()
     # Prefer pthread implementation on platforms where multiple are available.
-    set(CMAKE_THREAD_PREFER_PTHREAD ON)
+    set(CMAKE_THREAD_PREFER_PTHREAD OFF)
 endif()
 
 if(WIN32)
@@ -70,37 +70,37 @@ set(PD_SOURCES
     pure-data/src/d_misc.c
     pure-data/src/d_osc.c
     pure-data/src/d_resample.c
-    pure-data/src/d_soundfile.c
-    pure-data/src/d_soundfile_aiff.c
-    pure-data/src/d_soundfile_caf.c
-    pure-data/src/d_soundfile_next.c
-    pure-data/src/d_soundfile_wave.c
+    # pure-data/src/d_soundfile.c
+    # pure-data/src/d_soundfile_aiff.c
+    # pure-data/src/d_soundfile_caf.c
+    # pure-data/src/d_soundfile_next.c
+    # pure-data/src/d_soundfile_wave.c
     pure-data/src/d_ugen.c
-    pure-data/src/g_all_guis.c
-    pure-data/src/g_all_guis.h
-    pure-data/src/g_array.c
-    pure-data/src/g_bang.c
-    pure-data/src/g_canvas.c
-    pure-data/src/g_canvas.h
-    pure-data/src/g_clone.c
-    pure-data/src/g_editor.c
-    pure-data/src/g_editor_extras.c
-    pure-data/src/g_graph.c
-    pure-data/src/g_guiconnect.c
-    pure-data/src/g_io.c
-    pure-data/src/g_mycanvas.c
-    pure-data/src/g_numbox.c
-    pure-data/src/g_radio.c
-    pure-data/src/g_readwrite.c
-    pure-data/src/g_rtext.c
-    pure-data/src/g_scalar.c
-    pure-data/src/g_slider.c
-    pure-data/src/g_template.c
-    pure-data/src/g_text.c
-    pure-data/src/g_toggle.c
-    pure-data/src/g_traversal.c
-    pure-data/src/g_undo.c
-    pure-data/src/g_vumeter.c
+    # pure-data/src/g_all_guis.c
+    # pure-data/src/g_all_guis.h
+    # pure-data/src/g_array.c
+    # pure-data/src/g_bang.c
+    # pure-data/src/g_canvas.c
+    # pure-data/src/g_canvas.h
+    # pure-data/src/g_clone.c
+    # pure-data/src/g_editor.c
+    # pure-data/src/g_editor_extras.c
+    # pure-data/src/g_graph.c
+    # pure-data/src/g_guiconnect.c
+    # pure-data/src/g_io.c
+    # pure-data/src/g_mycanvas.c
+    # pure-data/src/g_numbox.c
+    # pure-data/src/g_radio.c
+    # pure-data/src/g_readwrite.c
+    # pure-data/src/g_rtext.c
+    # pure-data/src/g_scalar.c
+    # pure-data/src/g_slider.c
+    # pure-data/src/g_template.c
+    # pure-data/src/g_text.c
+    # pure-data/src/g_toggle.c
+    # pure-data/src/g_traversal.c
+    # pure-data/src/g_undo.c
+    # pure-data/src/g_vumeter.c
     pure-data/src/m_atom.c
     pure-data/src/m_binbuf.c
     pure-data/src/m_class.c
@@ -111,14 +111,19 @@ set(PD_SOURCES
     pure-data/src/m_obj.c
     pure-data/src/m_pd.c
     pure-data/src/m_pd.h
-    pure-data/src/m_sched.c
+    
+    # pthread to pico
+    # pure-data/src/m_sched.c
     pure-data/src/s_audio.c
     pure-data/src/s_audio_dummy.c
-    pure-data/src/s_inter.c
-    pure-data/src/s_inter_gui.c
+    #pure-data/src/s_inter.c
+ 
+    # pure-data/src/s_inter_gui.c
     pure-data/src/s_loader.c
     pure-data/src/s_main.c
-    pure-data/src/s_net.c
+
+    # remove networking support
+    # pure-data/src/s_net.c
     pure-data/src/s_path.c
     pure-data/src/s_print.c
     pure-data/src/s_stuff.h
@@ -129,12 +134,12 @@ set(PD_SOURCES
     pure-data/src/x_array.c
     pure-data/src/x_connective.c
     pure-data/src/x_file.c
-    pure-data/src/x_gui.c
+    # pure-data/src/x_gui.c
     pure-data/src/x_interface.c
     pure-data/src/x_list.c
     pure-data/src/x_midi.c
     pure-data/src/x_misc.c
-    pure-data/src/x_net.c
+    # pure-data/src/x_net.c
     pure-data/src/x_scalar.c
     pure-data/src/x_text.c
     pure-data/src/x_time.c
@@ -183,7 +188,7 @@ source_group(libpdutils FILES ${LIBPD_UTILS_SOURCES})
 include_directories(libpd_wrapper)
 include_directories(pure-data/src)
 
-find_package(Threads REQUIRED)
+#find_package(Threads)
 
 # create final list of source files
 set(SOURCE_FILES ${PD_SOURCES} ${LIBPD_SOURCES})
